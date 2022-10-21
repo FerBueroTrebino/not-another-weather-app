@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:not_another_weather_app/ui/pages/home_screen.dart';
+import 'package:not_another_weather_app/ui/screens/home_screen.dart';
 import 'package:not_another_weather_app/providers/game_provider.dart';
 
 void main() {
