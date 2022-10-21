@@ -16,40 +16,47 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: Consumer<GameProvider>(
               builder: (context, gameProvider, child) {
-                if (gameProvider.weather.id != 0) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'City ',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      const SizedBox(height: 20.0),
-                      Text(
-                        gameProvider.weather.name,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      const SizedBox(height: 60.0),
-                      Text(
-                        'Temperatura: ',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      const SizedBox(height: 20.0),
-                      Text(
-                        gameProvider.weather.main.temp.toString(),
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                    ],
-                  );
-                } else if (gameProvider.failure != null) {
-                  return Center(
-                    child: Text(gameProvider.failure!.message),
-                  );
-                } else {
+                if (gameProvider.state == NotifierState.loaded) {
+                  if (gameProvider.weather.id != 0) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'City ',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                        const SizedBox(height: 20.0),
+                        Text(
+                          gameProvider.weather.name,
+                          style: Theme.of(context).textTheme.headline4,
+                        ),
+                        const SizedBox(height: 60.0),
+                        Text(
+                          'Temperatura: ',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                        const SizedBox(height: 20.0),
+                        Text(
+                          gameProvider.weather.main.temp.toString(),
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                      ],
+                    );
+                  } else if (gameProvider.failure != null) {
+                    return Center(
+                      child: Text(gameProvider.failure!.message),
+                    );
+                  }
+                } else if ((gameProvider.state == NotifierState.loading)) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                }
+                } else if ((gameProvider.state == NotifierState.initial)) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } 
+                return Container();
               },
             ),
           ),
@@ -66,7 +73,8 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(width: 20.0),
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      context.read<GameProvider>().getCityWeather(),
                   child: Text('Higher'),
                 ),
               ),
