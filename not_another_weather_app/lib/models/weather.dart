@@ -79,7 +79,7 @@ class Clouds {
   int all;
 
   factory Clouds.fromJson(Map<String, dynamic> json) => Clouds(
-        all: json["all"],
+        all: json["all"] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -130,11 +130,11 @@ class Main {
 
   factory Main.fromJson(Map<String, dynamic> json) => Main(
         temp: json["temp"].toDouble(),
-        feelsLike: json["feels_like"].toDouble(),
-        tempMin: json["temp_min"].toDouble(),
-        tempMax: json["temp_max"].toDouble(),
-        pressure: json["pressure"],
-        humidity: json["humidity"],
+        feelsLike: json["feels_like"].toDouble() ?? 0,
+        tempMin: json["temp_min"].toDouble() ?? 0,
+        tempMax: json["temp_max"].toDouble() ?? 0,
+        pressure: json["pressure"] ?? 0,
+        humidity: json["humidity"] ?? 0,
         seaLevel: json["sea_level"] ?? 0,
         grndLevel: json["grnd_level"] ?? 0,
       );
@@ -159,7 +159,7 @@ class Rain {
   double the1H;
 
   factory Rain.fromJson(Map<String, dynamic> json) => Rain(
-        the1H: json["1h"].toDouble(),
+        the1H: json["1h"].toDouble() ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -183,11 +183,11 @@ class Sys {
   int sunset;
 
   factory Sys.fromJson(Map<String, dynamic> json) => Sys(
-        type: json["type"],
-        id: json["id"],
-        country: json["country"],
-        sunrise: json["sunrise"],
-        sunset: json["sunset"],
+        type: json["type"] ?? 0,
+        id: json["id"] ?? 0,
+        country: json["country"] ?? '',
+        sunrise: json["sunrise"] ?? '',
+        sunset: json["sunset"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -213,10 +213,10 @@ class WeatherElement {
   String icon;
 
   factory WeatherElement.fromJson(Map<String, dynamic> json) => WeatherElement(
-        id: json["id"],
-        main: json["main"],
-        description: json["description"],
-        icon: json["icon"],
+        id: json["id"] ?? 0,
+        main: json["main"] ?? '',
+        description: json["description"] ?? '',
+        icon: json["icon"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -239,9 +239,9 @@ class Wind {
   double gust;
 
   factory Wind.fromJson(Map<String, dynamic> json) => Wind(
-        speed: json["speed"],
-        deg: json["deg"],
-        gust: json["gust"] ?? 0,
+        speed: json["speed"].toDouble() ?? 0.0,
+        deg: json["deg"] ?? 0,
+        gust: json["gust"].toDouble() ?? 0.0,
       );
 
   Map<String, dynamic> toJson() => {
