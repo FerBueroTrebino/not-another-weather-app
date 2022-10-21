@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import 'package:not_another_weather_app/constants.dart';
-import 'package:not_another_weather_app/models/weather.dart';
+import 'package:not_another_weather_app/models/city_weather_model.dart';
 import 'package:not_another_weather_app/models/api_failure.dart';
 
 class WeatherApi {
-  Future<Weather> getWeather(Coord gpdCoords, String unit) async {
+  Future<CityWeather> getWeather(Coord gpdCoords, String unit) async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -17,7 +17,7 @@ class WeatherApi {
 
       if (response.statusCode == 200) {
         try {
-          Weather userInfoResult = weatherFromJson(response.body);
+          CityWeather userInfoResult = weatherFromJson(response.body);
           return userInfoResult;
         } catch (e) {
           throw ApiFailure(
