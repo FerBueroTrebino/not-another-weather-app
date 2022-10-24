@@ -10,6 +10,9 @@ class GameScore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(score.toString());
+    return Text(
+      'Your Score: ${score.toString()}',
+      style: Theme.of(context).textTheme.headline5,
+    );
   }
 }
